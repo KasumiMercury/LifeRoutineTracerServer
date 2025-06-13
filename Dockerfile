@@ -1,4 +1,4 @@
-FROM golang:1.24.3-alpine as builder
+FROM golang:1.24.4-alpine as builder
 
 RUN apk update
 
@@ -15,7 +15,7 @@ COPY --from=builder /app/main /
 
 CMD ["/app/main"]
 
-FROM golang:1.24.3-alpine as dev
+FROM golang:1.24.4-alpine as dev
 
 ENV CGO_ENABLED 0
 ENV GO111MODULE auto
