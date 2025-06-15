@@ -1,22 +1,21 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
 	"log/slog"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		_, err := w.Write([]byte("Hello, World!"))
-		if err != nil {
-			slog.Error("Failed to write response", "error", err)
-			return
-		}
-		slog.Info("Handled request", "method", r.Method, "url", r.URL)
+	router := gin.Default()
+
+	router.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello, World!")
+		slog.Info("Handled request", "method", c.Request.Method, "url", c.Request.URL)
 	})
 
 	slog.Info("Starting server on :8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := router.Run(":8080"); err != nil {
 		slog.Error("Failed to start server", "error", err)
 		return
 	}
