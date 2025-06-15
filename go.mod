@@ -1,4 +1,4 @@
-module github.com/KasumiMercury/LifeRoutineTracerServer
+module github.com/KasumiMercury/life-routine-tracer-server
 
 go 1.24.3
 
